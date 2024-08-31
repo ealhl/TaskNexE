@@ -22,7 +22,6 @@ db.connect()
 
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', require('./routes/userRoute'));
-app.use('/api/events', require('./routes/eventRoute'));
 app.use('/api/tasks', require('./routes/taskRoute'));
 
 // Start server
