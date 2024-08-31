@@ -6,7 +6,6 @@ import {
   Typography,
   Link,
   MenuItem,
-  Container,
 } from "@mui/material";
 
 const departments = ["HR", "Account", "IT", "Marketing"];
@@ -77,20 +76,13 @@ const RegisterForm = ({ formData, onChange, onSubmit, formError }) => {
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          <Button
-            fullWidth
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
+          <Button fullWidth type="submit" variant="contained" color="primary">
             Register
           </Button>
         </Grid>
         <Grid item xs={12}>
           {formError.global && (
-            <Typography color="error">
-              {formError.global}
-            </Typography>
+            <Typography color="error">{formError.global}</Typography>
           )}
         </Grid>
         <Grid item xs={12}>

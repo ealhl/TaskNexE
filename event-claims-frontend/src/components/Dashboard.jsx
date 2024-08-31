@@ -29,7 +29,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     // localStorage.clear();
-   
+
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       setUserRole(user.role);
@@ -117,8 +117,6 @@ const Dashboard = () => {
         throw new Error(errorText);
       }
 
-      const updatedTask = await updateResponse.json();
-
       fetchTasks();
       handleCloseTask();
     } catch (error) {
@@ -181,7 +179,7 @@ const Dashboard = () => {
         <Box sx={{ marginLeft: 10 }}>
           <Typography variant="h5">Total Progress</Typography>
           <Typography variant="h3">
-            {((approvedTasks / totalTasks) * 100).toFixed(0)| 0}%
+            {((approvedTasks / totalTasks) * 100).toFixed(0) | 0}%
           </Typography>
           <Typography variant="h6">Tasks completed: {approvedTasks}</Typography>
           <Typography variant="h6">Total tasks: {totalTasks}</Typography>

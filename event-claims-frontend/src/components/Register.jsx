@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Typography,
-  Container,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import { Typography, Container, Snackbar, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import RegisterForm from "./registerForm";
 
@@ -23,7 +18,11 @@ const RegisterPage = () => {
   });
 
   const [formError, setFormError] = useState({});
-  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   const navigate = useNavigate();
 
@@ -39,9 +38,11 @@ const RegisterPage = () => {
     if (!formData.lname) newFormError.lname = "Last name is required";
     if (!formData.email) newFormError.email = "Email is required";
     if (!formData.password) newFormError.password = "Password is required";
-    if (formData.password !== formData.rePassword) newFormError.rePassword = "Passwords do not match";
+    if (formData.password !== formData.rePassword)
+      newFormError.rePassword = "Passwords do not match";
     if (!formData.phone) newFormError.phone = "Phone number is required";
-    if (!formData.department) newFormError.department = "Department is required";
+    if (!formData.department)
+      newFormError.department = "Department is required";
     if (!formData.role) newFormError.role = "Role is required";
 
     setFormError(newFormError);
@@ -62,28 +63,39 @@ const RegisterPage = () => {
         const data = await response.json();
 
         if (response.ok) {
-          
           // Store the token and user info in localStorage
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', JSON.stringify(data.user));
-          
-          setSnackbar({ open: true, message: 'Registration successful!', severity: 'success' });
-          
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+
+          setSnackbar({
+            open: true,
+            message: "Registration successful!",
+            severity: "success",
+          });
+
           // Redirect to dashboard after a short delay
           setTimeout(() => navigate("/"), 1500);
         } else {
           console.error("Registration error:", data.message);
-          setSnackbar({ open: true, message: data.message || 'Registration failed', severity: 'error' });
+          setSnackbar({
+            open: true,
+            message: data.message || "Registration failed",
+            severity: "error",
+          });
         }
       }
     } catch (e) {
       console.error("Frontend error:", e);
-      setSnackbar({ open: true, message: 'Registration failed. Please try again.', severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: "Registration failed. Please try again.",
+        severity: "error",
+      });
     }
   };
 
   const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setSnackbar({ ...snackbar, open: false });
@@ -100,8 +112,16 @@ const RegisterPage = () => {
         onSubmit={handleSubmit}
         formError={formError}
       />
-      <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
           {snackbar.message}
         </Alert>
       </Snackbar>

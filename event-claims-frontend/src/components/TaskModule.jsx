@@ -17,7 +17,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import {getTaskTypeText} from "../helper/getTaskTypeText";
+import { getTaskTypeText } from "../helper/getTaskTypeText";
 
 import "./TaskModule.css";
 
@@ -30,7 +30,7 @@ const TaskModule = ({
   onApprove,
   onReject,
   onDelete,
-  onTaskUpdated
+  onTaskUpdated,
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedTask, setEditedTask] = useState({ ...task });
@@ -46,7 +46,7 @@ const TaskModule = ({
     const { name, value } = e.target;
     setEditedTask((prevTask) => ({
       ...prevTask,
-      [name]: name === 'task_type' ? (value === "Event Idea" ? 1 : 2) : value,
+      [name]: name === "task_type" ? (value === "Event Idea" ? 1 : 2) : value,
     }));
   };
 
@@ -68,7 +68,6 @@ const TaskModule = ({
       });
 
       if (response.ok) {
-        const data = await response.json();
         setIsEditMode(false);
         onTaskUpdated();
         onClose();

@@ -24,40 +24,38 @@ const LoginPage = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
 
-
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(postLogin, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({email, password}),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
+        throw new Error(data.message || "Login failed");
       }
       // Store user data in localStorage
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       setOpenSnackbar(true);
       setTimeout(() => {
         navigate("/");
       }, 1500);
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       setError(error.message);
     }
   };
 
   const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpenSnackbar(false);
@@ -92,12 +90,7 @@ const LoginPage = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              type="submit"
-            >
+            <Button fullWidth variant="contained" color="primary" type="submit">
               Sign In
             </Button>
           </Grid>
@@ -108,8 +101,16 @@ const LoginPage = () => {
           </Grid>
         </Grid>
       </form>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           Login successful! Redirecting to dashboard...
         </Alert>
       </Snackbar>
